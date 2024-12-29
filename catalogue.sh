@@ -1,5 +1,5 @@
 cp catalogue.service /etc/systemd/system/catalogue.service
-cp mongo.repo /ect/yum.repos.d/mongo.repo
+cp mongo.repo /etc/yum.repos.d/mongo.repo
 
 dnf module disable nodejs -y
 dnf module enable nodejs:20 -y
