@@ -24,4 +24,4 @@ systemctl start catalogue
 
 dnf install mongodb-mongosh -y
 
-mongosh --host mongo.azdevops.shop </app/db/master-data.js
+mongosh --host 10.0.0.5 </app/db/master-data.js
