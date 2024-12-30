@@ -3,4 +3,4 @@ dnf install mongodb-org -y
 sed -i 's|127.0.0.1/0.0.0.0/' /etc/mongod.conf
 systemctl enable mongod
 systemctl restart mongod
-#systemctl restart mongod As we moved the subsitute value to stating step no need of this step
+netstst -lntp
