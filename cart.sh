@@ -1,10 +1,9 @@
+source ./common.sh
 app_name=cart
 
 cp $app_name.service /etc/systemd/system/$app_name.service
 
-dnf module disable nodejs -y
-dnf module enable nodejs:20 -y
-dnf install nodejs -y
+NODEJS
 useradd roboshop
 
 rm -rf /app
