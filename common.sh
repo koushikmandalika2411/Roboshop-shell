@@ -1,3 +1,5 @@
+dir=$(pwd)
+
 NODEJS() {
 dnf module disable nodejs -y
 dnf module enable nodejs:20 -y
@@ -15,7 +17,7 @@ unzip /tmp/$app_name.zip
 cd /app
 npm install
 
-cp $app_name.service /etc/systemd/system/$app_name.service
+cp $dir/$app_name.service /etc/systemd/system/$app_name.service
 systemctl daemon-reload
 systemctl enable $app_name
 systemctl restart $app_name
