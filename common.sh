@@ -17,7 +17,7 @@ SYSTEMD_SETUP() {
 }
 APP_PREREQ(){
    echo add User
-   useradd roboshop
+   useradd roboshop &>>$log_file
 
     rm -rf /app
     echo remove dir
