@@ -14,4 +14,9 @@ unzip /tmp/$app_name.zip
 
 cd /app
 npm install
+
+cp $app_name.service /etc/systemd/system/$app_name.service
+systemctl daemon-reload
+systemctl enable $app_name
+systemctl restart $app_name
 }
