@@ -3,6 +3,14 @@ app_name=catalogue
 
 NODEJS
 
-cp mongo.repo /etc/yum.repos.d/mongo.repo
-dnf install mongodb-mongosh -y
-mongosh --host mongodb-dev.azdevops.shop </app/db/master-data.js
+echo Copy Mongo repo
+cp $dir/mongo.repo /etc/yum.repos.d/mongo.repo &>>$log_file
+PRINT_STATUS $?
+
+Echo Install Mongod
+dnf install mongodb-mongosh -y &>>$log_file
+PRINT_STATUS $?
+
+echo Load master Data
+mongosh --host mongodb-dev.azdevops.shop </app/db/master-data.js &>>$log_file
+PRINT_STATUS $?
