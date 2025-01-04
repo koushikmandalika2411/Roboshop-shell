@@ -13,7 +13,7 @@ PRINT_STATUS(){
 SYSTEMD_SETUP() {
     echo Copy service file
     cp $dir_path/$app_name.service /etc/systemd/system/$app_name.service &>>$log_file
-    PRINT_STATUS
+    PRINT_STATUS $?
 
     echo Reload demon user
     systemctl daemon-reload &>>$log_file
