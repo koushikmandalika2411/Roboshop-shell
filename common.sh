@@ -30,6 +30,7 @@ APP_PREREQ(){
          echo SUCCESS
        else
          echo FAILURE
+    fi
 
     rm -rf /app
     echo Remove dir
