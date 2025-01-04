@@ -8,7 +8,7 @@ PRINT_STATUS(){
       else
         echo -e " \e[31mFAILURE\e[0m"
         exit 1
-        fi
+      fi
 }
 SYSTEMD_SETUP() {
     echo Copy service file
@@ -29,12 +29,11 @@ SYSTEMD_SETUP() {
 }
 APP_PREREQ(){
    echo Add User
-   useradd roboshop &>>$log_file
-  if [ $? -eq 0 ]; then
-        echo -e " \e[32mSUCCESS\e[0m"
-      else
-        echo -e " \e[31mFAILURE\e[0m"
-        fi
+   id roboshop &>>$log_file
+   if [ $? -eq 1 ]; then
+      useradd roboshop &>>$log_file
+   fi
+   PRINT_STATUS $?
 
     rm -rf /app
     echo Remove dir
