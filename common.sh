@@ -9,6 +9,7 @@ SYSTEMD_SETUP() {
       echo SUCCESS
     else
       echo FAILURE
+      fi
 
     echo Reload demon user
     systemctl daemon-reload &>>$log_file
