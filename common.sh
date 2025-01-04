@@ -5,7 +5,10 @@ rm -f $log_file
 SYSTEMD_SETUP() {
     echo Copy service file
     cp $dir/$app_name.service /etc/systemd/system/$app_name.service
-    echo $?
+    if [ $? -eq 0 ]; then
+      echo SUCCESS
+    else
+      echo FAILURE
 
     echo Reload demon user
     systemctl daemon-reload &>>$log_file
@@ -22,7 +25,10 @@ SYSTEMD_SETUP() {
 APP_PREREQ(){
    echo Add User
    useradd roboshop &>>$log_file
-   echo $?
+   if [ $? -eq 0 ]; then
+         echo SUCCESS
+       else
+         echo FAILURE
 
     rm -rf /app
     echo Remove dir
@@ -31,6 +37,8 @@ APP_PREREQ(){
 
     echo Download file
     curl -L -o /tmp/$app_name.zip https://roboshop-artifacts.s3.amazonaws.com/$app_name-v3.zip &>>$log_file
+    echo $?
+
     cd /app &>>$log_file
 
     echo Unzip the file
