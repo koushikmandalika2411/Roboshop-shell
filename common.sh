@@ -8,7 +8,7 @@ SYSTEMD_SETUP() {
     if [ $? -eq 0 ]; then
       echo -e " \e[32mSUCCESS\e[0m"
     else
-      echo -e " \e[32mFAILURE\e[0m"
+      echo -e " \e[31mFAILURE\e[0m"
       fi
 
     echo Reload demon user
@@ -26,11 +26,11 @@ SYSTEMD_SETUP() {
 APP_PREREQ(){
    echo Add User
    useradd roboshop &>>$log_file
-   if [ $? -eq 0 ]; then
-         echo SUCCESS
-       else
-         echo FAILURE
-    fi
+  if [ $? -eq 0 ]; then
+        echo -e " \e[32mSUCCESS\e[0m"
+      else
+        echo -e " \e[31mFAILURE\e[0m"
+        fi
 
     rm -rf /app
     echo Remove dir
