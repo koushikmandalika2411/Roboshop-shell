@@ -4,7 +4,7 @@ app_name=catalogue
 NODEJS
 
 echo Copy Mongo repo
-cp $dir/mongo.repo /etc/yum.repos.d/mongo.repo &>>$log_file
+cp $dir_path/mongo.repo /etc/yum.repos.d/mongo.repo &>>$log_file
 PRINT_STATUS $?
 
 Echo Install Mongod
