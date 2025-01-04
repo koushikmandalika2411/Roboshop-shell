@@ -3,70 +3,90 @@ log_file=/tmp/roboshop.log
 rm -f $log_file
 
 SYSTEMD_SETUP() {
-    echo copy service file
+    echo Copy service file
     cp $dir/$app_name.service /etc/systemd/system/$app_name.service
+    echo $?
 
-    echo reload demon user
+    echo Reload demon user
     systemctl daemon-reload &>>$log_file
+    echo $?
 
-    echo enable service
+    echo Enable service
     systemctl enable $app_name &>>$log_file
+    echo $?
 
-    echo restart service
+    echo Restart service
     systemctl restart $app_name &>>$log_file
+    echo $?
 }
 APP_PREREQ(){
-   echo add User
+   echo Add User
    useradd roboshop &>>$log_file
+   echo $?
 
     rm -rf /app
-    echo remove dir
+    echo Remove dir
     mkdir /app &>>$log_file
-    echo download file
+    echo $?
+
+    echo Download file
     curl -L -o /tmp/$app_name.zip https://roboshop-artifacts.s3.amazonaws.com/$app_name-v3.zip &>>$log_file
     cd /app &>>$log_file
-    echo unzip the file
+
+    echo Unzip the file
     unzip /tmp/$app_name.zip &>>$log_file
+    echo $?
 
     cd /app
 }
 NODEJS() {
 echo Disable Default  NodeJS Version
 dnf module disable nodejs -y &>>$log_file
+echo $?
 
-echo enable node 20 version
+echo Enable node 20 version
 dnf module enable nodejs:20 -y &>>$log_file
+echo $?
 
-echo install nodejs
+echo Install nodejs
 dnf install nodejs -y &>>$log_file
+echo $?
 
 APP_PREREQ
-echo install dependency
+echo Install dependency
 npm install &>>$log_file
+echo $?
 
 SYSTEMD_SETUP
 }
 
 JAVA() {
-  echo install maven
+  echo Install maven
   dnf install maven -y &>>$log_file
+  echo $?
 
   APP_PREREQ
 
-  echo clean packages
+  echo Clean packages
   mvn clean package &>>$log_file
+  echo $?
+
+  echo Move target
   mv target/$app_name-1.0.jar $app_name.jar &>>$log_file
+  echo $?
 
   SYSTEMD_SETUP
 }
 
 PYTHON(){
-  echo install python3
+  echo Install python3
   dnf install python3 gcc python3-devel -y &>>$log_file
+  echo $?
 
   APP_PREREQ
-  echo install requirements
+  echo Install requirements
   pip3 install -r requirements.txt &>>$log_file
+  echo $?
 
  SYSTEMD_SETUP
 }
