@@ -6,9 +6,9 @@ SYSTEMD_SETUP() {
     echo Copy service file
     cp $dir/$app_name.service /etc/systemd/system/$app_name.service
     if [ $? -eq 0 ]; then
-      echo SUCCESS
+      echo -e " \e[32mSUCCESS\e[0m"
     else
-      echo FAILURE
+      echo -e " \e[31mFAILURE\e[0m"
       fi
 
     echo Reload demon user
